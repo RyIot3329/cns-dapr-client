@@ -1,32 +1,32 @@
 // get.js - CNS Dapr client example
 // Copyright 2023 Padi, Inc. All Rights Reserved.
 
-'use strict';
+"use strict";
 
 // Imports
 
-const dapr = require('@dapr/dapr');
+const dapr = require("@dapr/dapr");
 
 // Constants
 
-const DAPR_HOST = process.env.CNS_DAPR_HOST || 'localhost';
-const DAPR_PORT = process.env.CNS_DAPR_PORT || '3500';
+const DAPR_HOST = process.env.CNS_DAPR_HOST || "localhost";
+const DAPR_PORT = process.env.CNS_DAPR_PORT || "3500";
 
-const CNS_DAPR = process.env.CNS_DAPR || 'cns-dapr';
-const CNS_CONTEXT = process.env.CNS_CONTEXT || '';
+const CNS_DAPR = process.env.CNS_DAPR || "cns-dapr";
+// const CNS_DAPR = process.env.CNS_DAPR || "localhost";
+const CNS_CONTEXT = process.env.CNS_CONTEXT || "Uud1c8RS2YQTqQ3u47eg";
 
 // Dapr client
 
 const client = new dapr.DaprClient({
   daprHost: DAPR_HOST,
-  daprPort: DAPR_PORT
+  daprPort: DAPR_PORT,
 });
 
 // Client application
 async function start() {
   // No context?
-  if (CNS_CONTEXT === '')
-    throw new Error('not configured');
+  if (CNS_CONTEXT === "") throw new Error("not configured");
 
   // Start client
   await client.start();
@@ -37,9 +37,9 @@ async function start() {
   try {
     const method = process.argv[2] || CNS_CONTEXT;
     res = await client.invoker.invoke(CNS_DAPR, method, dapr.HttpMethod.GET);
-  } catch(e) {
+  } catch (e) {
     // Failure
-    throw new Error('bad request');
+    throw new Error("bad request");
   }
 
   // Display response
@@ -48,6 +48,6 @@ async function start() {
 
 // Start application
 start().catch((e) => {
-  console.error('Error:', e.message);
+  console.error("Error:", e.message);
   process.exit(1);
 });

@@ -23,7 +23,7 @@ const client = new dapr.DaprClient({
 });
 
 // Client application
-async function start() {
+async function postEdgex(data) {
   // No context?
   if (CNS_CONTEXT === "") throw new Error("not configured");
 
@@ -39,13 +39,15 @@ async function start() {
     //   CNS_CONTEXT + "/connections/0HT2SKHR1Mi02oVEuAmG/properties";
     const method = CNS_CONTEXT + "/connections/0HT2SKHR1Mi02oVEuAmG/properties";
     //var data = process.argv[3] || { far1: "hello" };
-    var data = {
-      foo1: "helloFFFFFF",
-      foo2: "Foo22222",
-      far1: "farrrr1",
-      far2: "jjjjj",
-      doesnotexist: "test",
-    };
+    // var data = {
+    //   foo1: "helloFFFFFF",
+    //   foo2: "Foo22222",
+    //   far1: "farrrr1",
+    //   far2: "jjjjj",
+    //   doesnotexist: "test",
+    // };
+
+    console.log(data);
 
     try {
       data = JSON.parse(data);
